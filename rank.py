@@ -1,7 +1,11 @@
 import requests
 from bs4 import BeautifulSoup
 
+arquivo = open('arq01.csv','w')
+arquivo.write("")
+arquivo.close()
 
+arquivo = open('arq01.csv','a', encoding="utf-8")
 def filter(index, datas):
     nickname = None
     power = None
@@ -25,8 +29,12 @@ def filter(index, datas):
     for name in names:
         if name != nickname:
             guild = name
-
-    print(f"{index}: {nickname} - {power} - {guild}")
+    
+    arquivo.write(f"{index},: {nickname} , {power} , {guild}\n")
+    
+    #print(f"{index}: {nickname} - {power} - {guild}")
+    
+    
     data = {
             "index": index,
             "nickname":nickname,
@@ -49,3 +57,5 @@ for page in range(1, 11):
             index += 1
             filter(index, datas)
             datas = []
+
+arquivo.close()
